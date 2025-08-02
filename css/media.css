@@ -578,6 +578,9 @@
       height: 35vh;
       margin-top: 170%;
     }
+    #projects{
+      margin-top: -60%;
+    }
     .kijkje h1{
       font-size: 50px;
     }
