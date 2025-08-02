@@ -1,4 +1,67 @@
 
+@media (max-width: 1440px) {
+  html, body {
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none; 
+
+    }
+    .profile-image {
+      width: 36vh;
+      height: auto;
+    }
+    
+    #about {
+      overflow-x: none;
+      margin-top: 10%;
+    }
+  
+    .text-colomn {
+      width: 70vw;
+      font-size: 16px;
+    }
+  
+    .text1 {
+      width: 20vw;
+    }
+  
+    .text2 {
+      width: 30vw;
+      margin-left: -20px;
+    }
+  
+    .symbol1,
+    .idkidk1,
+    .idkidk {
+      display: none;
+    }
+  
+    .symbol5 {
+      margin-top: 6%;
+      margin-right: 12vw;
+    }
+  
+    .row2 {
+      margin-left: -21%;
+    }
+  
+    .image2 {
+      width: 22vw;
+    }
+  
+    .locatie {
+      margin-top: 1vh;
+    }
+  
+    .diamant {
+      display: none;
+    }
+  
+
+  }
+  
   @media (max-width: 1282px) {
   
     .section1 {
@@ -597,11 +660,10 @@
       width: 40vw;
       margin-left: -50vw;
     }
+  
 
-    
 .timeline-line{
   height: 20px;
 }
-
   }
   
