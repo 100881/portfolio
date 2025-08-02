@@ -575,7 +575,7 @@
       margin-top: 100px;
     }
     #skills{
-      margin-top: 120vh;
+      margin-top: 75vh;
     }
     .kijkje h1{
       font-size: 50px;
@@ -661,7 +661,9 @@
       margin-left: -50vw;
     }
   
-
+    #projects{
+      margin-top: -10%;
+    }
 .timeline-line{
   height: 20px;
 }
