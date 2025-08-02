@@ -632,6 +632,7 @@ padding: 100px;
 }
 
 .timeline-line {
+  height: 92% !important;
   position: absolute;
   top: 0;
   bottom: 0;
