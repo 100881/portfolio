@@ -145,12 +145,17 @@
       width: 200px;
     }
 
+        #skills{
+      margin-top: 15%;
+    }
+
     .timeline-container {
       margin-left: 50px;
       padding: 100px 150px;
     }
   
     .timeline-line {
+      height: 90% !important;
       left: 50px;
       transform: none;
     }
@@ -181,6 +186,8 @@
     .project-content {
       padding: 20px;
     }
+
+
   }
   
   @media (max-width: 1024px) {
@@ -312,7 +319,10 @@
   .kijkje_text{
     margin-top: 35vh;
   }
-
+#skills{
+  margin-top: 55%;
+  height: 90vh;
+}
   #projects{
     z-index: 20;
   }
@@ -393,6 +403,49 @@
       margin: 10px 30px;
       font-size: 15px;
     }
+
+     #skills {
+      margin-top: 120%;
+      height: 35vh;
+       padding: 30px 20px;
+   }
+
+   #skills h2 {
+       font-size: 2rem;
+       margin-bottom: 25px;
+   }
+
+   #skills h2::before {
+       font-size: 2.3rem;
+       margin-right: 10px;
+   }
+
+   .skills-grid {
+       grid-template-columns: 1fr 1fr;
+       gap: 15px;
+       margin-top: 20px;
+   }
+
+   .skill-card {
+       padding: 18px;
+       border-radius: 14px;
+   }
+
+   .skill-name {
+       font-size: 1rem;
+   }
+
+   .skill-percentage {
+       font-size: 0.95rem;
+   }
+
+   .skill-header {
+       margin-bottom: 13px;
+   }
+
+   .progress-container {
+       height: 7px;
+   }
   
     .kijkje{
       margin-top: 35vh;
@@ -521,7 +574,9 @@
     .text1 {
       margin-top: 100px;
     }
-    
+    #skills{
+      margin-top: 75vh;
+    }
     .kijkje h1{
       font-size: 50px;
     }
@@ -605,7 +660,7 @@
       width: 40vw;
       margin-left: -50vw;
     }
-  
+
 .timeline-line{
   height: 20px;
 }

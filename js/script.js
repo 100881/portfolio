@@ -3,6 +3,38 @@ document.addEventListener('contextmenu', (e) => e.preventDefault());
 document.addEventListener('copy', (e) => e.preventDefault());
 document.addEventListener('paste', (e) => e.preventDefault());
 
+ const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const progressBar = card.querySelector('.progress-bar');
+                    const skillLevel = card.getAttribute('data-skill');
+                    
+                   
+                    card.classList.add('animate');
+                    
+                   
+                    setTimeout(() => {
+                        progressBar.style.width = skillLevel + '%';
+                    }, 200);
+                }
+            });
+        }, observerOptions);
+
+  
+        document.querySelectorAll('.skill-card').forEach(card => {
+            observer.observe(card);
+        });
+
+      
+        document.querySelectorAll('.skill-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
 
 window.addEventListener('load', () => {
     const scrollToTopBtn = document.querySelector('.scroll-to-top');
@@ -99,3 +131,4 @@ window.addEventListener('load', () => {
         }, 200);
     });
 });
+
