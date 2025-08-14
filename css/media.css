@@ -1,0 +1,684 @@
+
+@media (max-width: 1440px) {
+  html, body {
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+    user-select: none; 
+
+    }
+    .profile-image {
+      width: 36vh;
+      height: auto;
+    }
+    
+    #about {
+      overflow-x: none;
+      margin-top: 10%;
+    }
+  
+    .text-colomn {
+      width: 70vw;
+      font-size: 16px;
+    }
+  
+    .text1 {
+      width: 20vw;
+    }
+  
+    .text2 {
+      width: 30vw;
+      margin-left: -20px;
+    }
+  
+    .symbol1,
+    .idkidk1,
+    .idkidk {
+      display: none;
+    }
+  
+    .symbol5 {
+      margin-top: 6%;
+      margin-right: 12vw;
+    }
+  
+    .row2 {
+      margin-left: -21%;
+    }
+  
+    .image2 {
+      width: 22vw;
+    }
+  
+    .locatie {
+      margin-top: 1vh;
+    }
+  
+    .diamant {
+      display: none;
+    }
+  
+
+  }
+  
+  @media (max-width: 1282px) {
+  
+    .section1 {
+      height: 100vh;
+    }
+  
+    #nav .hamburger,
+    .symbol5 {
+      display: none;
+    }
+  
+    .naam {
+      margin-bottom: 6vh;
+      margin-left: -230px;
+    }
+  
+    .hart {
+      margin-left: -140px;
+    }
+  
+    .achternaam {
+      margin-left: -200px;
+    }
+  
+    .profile-image {
+      width: 40vw;
+      height: auto;
+    }
+  
+    #about {
+      margin-top: 20%;
+    }
+  
+    .row {
+      width: 90vw;
+    }
+  
+    .profile-pic {
+      width: 43vw;
+    }
+  
+    .linez {
+      width: 15vw;
+    }
+  
+    .book-img {
+      margin-left: 6px;
+    }
+  
+    .text-colomn {
+      font-size: 18px;
+      margin-left: -10%;
+    }
+  
+    .text1 {
+      margin-left: -10px;
+      width: 28vw;
+    }
+  
+    .text2 {
+      margin-left: 21%;
+      width: 30vw;
+    }
+  
+    .symbol5 {
+      margin-right: 7vw;
+      margin-top: 3vh;
+    }
+  
+    .row2 {
+      margin-left: 20px;
+    }
+  
+    .image2 {
+      margin-left: -20px;
+      width: 25vw;
+    }
+  
+    .image3,
+    .image4 {
+      width: 200px;
+    }
+
+        #skills{
+      margin-top: 15%;
+    }
+
+    .timeline-container {
+      margin-left: 50px;
+      padding: 100px 150px;
+    }
+  
+    .timeline-line {
+      height: 90% !important;
+      left: 50px;
+      transform: none;
+    }
+  
+    .year-marker {
+      left: 30px;
+      transform: none;
+    }
+  
+    .year-label {
+      left: 50px !important;
+      right: auto !important;
+      transform: none;
+      text-align: left;
+    }
+  
+    .project-card {
+      width: 60%;
+      
+    }
+  
+    .left-card,
+    .right-card {
+      margin: 40px 0;
+      padding: 0;
+    }
+  
+    .project-content {
+      padding: 20px;
+    }
+
+
+  }
+  
+  @media (max-width: 1024px) {
+
+    .row2,
+    .symbol4,
+    #nav .hamburger,
+    .locatie {
+      display: none;
+    }
+  
+    #about {
+      margin-top: 15%;
+    }
+  
+    .row {
+      width: 90vw;
+    }
+  
+    .profile-pic {
+      width: 43vw;
+    }
+  
+    .linez {
+      width: 15vw;
+    }
+  
+    .book-img {
+      margin-left: 6px;
+    }
+  
+    .text-colomn {
+      margin-left: 0;
+      width: 40vw;
+      font-size: 17px;
+    }
+  
+    .text1 {
+      margin-left: 0;
+      width: 30vw;
+    }
+  
+#skills{
+  margin-top: -20%;
+}
+    .text2 {
+      margin-left: 0;
+      width: 35vw;
+    }
+    .timeline-line {
+      left: 100px;
+    }
+  
+    .year-marker {
+      left: 80px;
+    }
+  
+    .project-card {
+      margin-top: 50px;
+      width: 90%;
+      margin-left: 20px;
+      padding-left: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {  
+    .naam,
+    .achternaam {
+      font-size: 40px;
+    }
+  
+    .naam {
+      margin-left: -120px;
+    }
+  
+    .hart {
+      padding: 2px;
+      margin-left: -120px;
+    }
+  
+    .achternaam {
+      margin-top: -33px;
+      margin-left: -100px;
+    }
+  
+    .comma{
+      font-size: 55px;
+    }
+.text{
+  font-size: 30px;
+  margin-top: 70px;
+  margin-bottom: 10px;
+}
+    .attract {
+      margin-top: 5px;
+    font-size: 30px;
+    }
+  
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 10px;
+    }
+  
+    .row {
+      margin-top: 10%;
+    }
+  
+    .book-img {
+      margin-left: 15vw;
+    }
+  
+    .text-colomn {
+      display: grid;
+    }
+  
+    .text1 {
+      margin-left: 5px;
+      width: 32vw;
+      font-size: 15px;
+    }
+  
+    .text2 {
+      margin-top: 45vh;
+      margin-left: -35vw;
+      width: 60vw;
+      font-size: 18px;
+    }
+
+  .kijkje_text{
+    margin-top: 35vh;
+  }
+    
+  #skills{
+    margin-top: 50vh;
+  }
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+  #projects{
+       margin-top: -40vh;
+    z-index: 20;
+  }
+  .project-card{
+    margin-top: 50px;
+    padding-bottom: 30px;
+  }
+  #marker-2025{
+    margin-top: -25px;
+  }
+  }
+  
+  @media (max-width: 600px) {
+
+    .symbol2,
+    .comma,
+    .chase-attract {
+      display: none;
+      overflow-x: hidden
+    }
+    #nav {
+      max-width: fit-content;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 35px;
+    }
+  
+    #nav .menu {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 20px;
+      margin-left: 0;
+      padding: 0;
+    }
+  
+    #nav .menu li {
+      margin-left: 0;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+  
+    .profile-image {
+      margin-left: 20px;
+      width: 60vw;
+      height: auto;
+    }
+  
+    .text-container {
+      margin-left: -300px;
+    }
+  
+    .naam,
+    .achternaam {
+      font-size: 50px;
+    }
+  
+    .opleiding {
+      margin-top: 50vh;
+    }
+  
+    .row {
+      margin-top: 10%;
+    }
+  
+    .linez {
+      width: 20vw;
+    }
+  
+    .text-colomn {
+      margin-top: 160%;
+      margin-left: -45%;
+      width: 90%;
+    }
+  
+  
+    .text1, .text2 {
+      width: 80%;
+      margin: 10px 30px;
+      font-size: 15px;
+    }
+
+     #skills {
+      height: 100vh;
+
+       padding: 30px 20px;
+   }
+   #skills h2{
+    margin-top: 50%;
+   }
+
+#projects{
+  margin-top: 10px;
+}
+   .progress-container {
+       height: 7px;
+   }
+  
+  
+    .kijkje{
+      margin-top: 45vh;
+    }
+    .contacteer-mij,
+    .contact-container {
+      display: none;
+    }
+    .timeline-line,
+    .year-label,
+    .year-dot{
+      margin-left: -100px;
+    }
+  .project-card{
+    margin-left: -70px;
+    width: 60vw;
+  }
+   
+  }
+  
+  @media (max-width: 480px) {
+   
+    .book-img,
+    #nav .hamburger {
+      display: none;
+    }
+  
+    .profile-pic {
+      margin-left: 15vw;
+      margin-top: 5%;
+    }
+  
+    .info-section {
+      font-size: 18px;
+      margin-top: 0;
+    }
+  
+    .linez {
+      width: 50vw;
+    }
+    
+    .text-colomn {
+      margin-top: 75vh;
+      margin-left: -50vw;
+      width: 80%;
+    }
+  
+    .text1, .text2 {
+      width: 90%;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+     #skills {
+        height: 150vh;
+        padding: 30px 15px;
+    }
+    
+    #skills h2 {
+      margin-top: 1,2%;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    
+    #skills h2::before {
+        font-size: 2rem;
+        margin-right: 8px;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+    #projects{
+    margin-top: 55vh;
+    }
+
+    .timeline-line {
+      left: 120px;
+    }
+  .year-dot{
+    margin-left: 0;
+  }
+    .year-marker {
+      left: 0;
+      transform: none;
+    }
+  
+    .year-label {
+      left: 140px !important;
+      right: auto !important;
+      text-align: left;
+      font-size: 18px;
+    }
+  
+    .project-card {
+      width: 65vw;
+      margin-left: 10px;
+    }
+  
+    .left-card,
+    .right-card {
+      margin: 30px -70px 80px;
+      padding: 0;
+    }
+  
+    .project-content {
+      padding: 15px;
+    }
+  
+    .project-content h3 {
+      font-size: 1.3rem;
+    }
+  
+    .project-subtitle,
+    .project-date,
+    .project-description {
+      font-size: 0.95rem;
+    }
+  
+    .project-image img {
+      max-height: 200px;
+    }
+
+
+  }
+  
+  
+  @media (max-width: 400px) {
+    .naam,
+    .achternaam{
+      margin-left: auto;
+      font-size: 40px;
+    }
+    .hart{
+      font-size: 20px;
+      margin-left: 10px;
+    }
+    .profile-pic{
+      margin-left: 20px;
+    }
+    .section {
+      height: auto;
+      overflow-x: hidden;
+    }
+  
+    .text1 {
+      margin-top: 100px;
+    }
+ #skills h2{
+margin-top: 30vh;
+ }
+
+    .kijkje h1{
+      font-size: 50px;
+    }
+    .project-card {
+      width: 65vw;
+      margin-left: -100px;
+      margin-bottom: 100px;
+    }
+    #marker-2024{
+      margin-top: 10px;
+      z-index: 2;
+    }
+    #marker-2025,
+    #marker-2025-2{
+      margin-top: -70px;
+    }
+  }
+  
+  @media (max-width: 393px) {
+    .opleiding{
+      font-size: 10px;
+      z-index: 2;
+      margin-right: 40px;
+    } 
+    #skills h2{
+      margin-top: 40vh;
+    }
+
+    .kijkje{
+      margin-top: 85vh;
+    }
+
+    .profiel {
+      margin-left: -40px;
+    }
+  
+    .naam,
+    .hart,
+    .achternaam {
+      margin-left: 10px;
+      font-size: 30px;
+    }
+
+    .left-card,
+    .right-card {
+      margin: 60px -120px 120px;
+      padding: 0;
+    }
+    
+  }
+  
+  
+  @media (max-width: 375px) {
+  #section1{
+    width: 100vw;
+  }
+    .profiel {
+      margin-top: 20vh;
+      margin-left: -160px;
+    }
+    .naam {
+      font-size: auto;
+    }
+    .hart{
+    margin-left: 20px;
+    font-size: 23px;
+    }
+
+    .opleiding {
+      margin-top: 60vh;
+      margin-left: 140px;
+    }
+  
+    .symbol1 {
+      overflow-x: hidden;
+      margin-top: 0;
+      margin-left: 10vw;
+      font-size: 35px;
+    }
+
+    .profile-img{
+      margin-top: 10vh;
+      margin-left: -10px;
+    }
+  
+    .text-colomn {
+      width: 40vw;
+      margin-left: -50vw;
+    }
+#skills {
+  margin-top: 55vh;
+  height: 150vh;
+}
+
+.timeline-line{
+  height: 20px;
+}
+  }
+  

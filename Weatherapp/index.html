@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Themed Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="grid-container">
+        
+        <div class="grid-item weather">
+            <div class="current-weather">
+                <h2>Weather in Rotterdam</h2>
+                <div id="weather-icon"></div>
+                <p><strong>Temperature:</strong> <span id="temperature">--</span>°C</p>
+                <p><strong>Weather:</strong> <span id="weather-description">--</span></p>
+                <p><strong>Humidity:</strong> <span id="humidity">--</span>%</p>
+                <p><strong>Wind Speed:</strong> <span id="wind-speed">--</span> m/s</p>
+            </div>
+            <div class="forecast">
+                <h2>5-Day Forecast</h2>
+                <div id="forecast-container"></div>
+            </div>
+        </div>
+
+      
+        <div class="grid-item iss-location" id="iss-data">
+            <h2>ISS Location</h2>
+            
+        </div>
+
+       
+        <div class="grid-item nasa-apod" id="nasa-data">
+            <h2>NASA Picture of the Day</h2>
+            <div id="nasa-content"></div>
+        </div>
+
+        
+        <div class="grid-item entertainment" id="news-container">
+            <h2>Daily Entertainment</h2>
+            
+        </div>
+    </div>
+  <script src="js/scripts.js"></script>
+</body>
+</html>

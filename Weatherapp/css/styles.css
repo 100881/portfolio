@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    font-family: 'Arial', sans-serif;
+    background: #000000;
+    min-height: 100vh;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: starsMove 200s linear infinite;
+    z-index: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(2, auto);
+    gap: 25px;
+    min-height: auto;
+    max-width: 1400px;
+    max-height: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+}
+
+/* Weather Box - Left side, full height */
+.weather {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    height: 100%;
+    min-width: 300px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(13, 17, 38, 0.8), rgba(20, 24, 60, 0.8));
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 1px solid rgba(86, 129, 255, 0.2);
+}
+
+.current-weather {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(86, 128, 255, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.current-weather h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    width: 100%;
+    color: #5681ff;
+    text-shadow: 0 0 10px rgba(86, 129, 255, 0.5);
+}
+
+.current-weather p {
+    margin: 8px 0;
+    font-size: 1.2em;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#weather-icon {
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#weather-icon img {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 0 10px rgba(86, 129, 255, 0.5));
+}
+
+.forecast {
+    padding-top: 15px;
+    text-align: left;
+}
+
+.forecast h2 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #5681ff;
+    text-shadow: 0 0 10px rgba(86, 129, 255, 0.5);
+}
+
+.forecast-day {
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(86, 128, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1em;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.forecast-day:hover {
+    background: rgba(86, 128, 255, 0.15);
+    transform: translateX(5px);
+    border-color: rgba(86, 128, 255, 0.3);
+}
+
+.forecast-day img {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 8px rgba(86, 129, 255, 0.4));
+}
+
+.temp-range {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    flex-grow: 1;
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.temp-bar {
+    flex-grow: 1;
+    height: 4px;
+    background: rgba(86, 128, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.temp-fill {
+    height: 100%;
+    background: rgba(86, 128, 255, 0.8);
+    border-radius: 2px;
+}
+
+/* ISS Location Box - Top right */
+.iss-location {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(13, 17, 38, 0.8), rgba(20, 24, 60, 0.8));
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 1px solid rgba(86, 129, 255, 0.2);
+}
+
+.iss-map {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+}
+
+.iss-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.iss-stat-item {
+    text-align: center;
+}
+
+.stat-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(86, 128, 255, 0.1);
+    border: 2px solid rgba(86, 128, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 5px;
+    transition: all 0.3s ease;
+}
+
+.stat-circle:hover {
+    transform: scale(1.1);
+    border-color: rgba(86, 128, 255, 0.5);
+}
+
+/* ISS Crew Section */
+.iss-crew {
+    margin-top: 20px;
+    background: rgba(86, 128, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+}
+
+.iss-crew h3 {
+    color: #5681ff;
+    font-size: 1.3em;
+    text-shadow: 0 0 10px rgba(86, 129, 255, 0.5);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.crew-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.crew-member {
+    text-align: center;
+    background: rgba(86, 128, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+}
+
+.crew-member:hover {
+    transform: translateY(-5px);
+    background: rgba(86, 128, 255, 0.15);
+    border-color: rgba(86, 128, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(86, 129, 255, 0.2);
+}
+
+.astronaut-photo {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(86, 128, 255, 0.3);
+    box-shadow: 0 0 15px rgba(86, 129, 255, 0.2);
+    background: rgba(13, 17, 38, 0.5);
+}
+
+.astronaut-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.crew-member:hover .astronaut-photo {
+    border-color: rgba(86, 128, 255, 0.6);
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.4);
+}
+
+.crew-member:hover .astronaut-photo img {
+    transform: scale(1.1);
+}
+
+.crew-member p {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.crew-member .role {
+    font-size: 0.85em;
+    color: rgba(86, 128, 255, 0.8);
+    margin-top: 4px;
+}
+
+.crew-count {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.crew-count span {
+    color: #5681ff;
+    font-weight: bold;
+}
+
+/* NASA APOD Styles */
+.nasa-apod {
+    grid-column: 3;YYYY
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(13, 17, 38, 0.8), rgba(20, 24, 60, 0.8));
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 1px solid rgba(86, 129, 255, 0.2);
+    height: 100%;
+}
+
+#nasa-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#nasa-content h3 {
+    color: #5681ff;
+    font-size: 1.3em;
+    text-shadow: 0 0 10px rgba(86, 129, 255, 0.5);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.nasa-image-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 2px solid rgba(86, 129, 255, 0.2);
+    background: rgba(13, 17, 38, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nasa-image-container:hover {
+    border-color: rgba(86, 129, 255, 0.4);
+    box-shadow: 0 0 30px rgba(86, 129, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.nasa-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.nasa-image-container:hover img {
+    transform: scale(1.05);
+}
+
+.nasa-title {
+    color: #5681ff;
+    font-size: 1.1em;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(86, 129, 255, 0.4);
+}
+
+.nasa-description {
+    background: rgba(86, 128, 255, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(86, 129, 255, 0.2);
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(86, 129, 255, 0.5) rgba(13, 17, 38, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nasa-description:hover {
+    background: rgba(86, 128, 255, 0.15);
+    border-color: rgba(86, 129, 255, 0.3);
+}
+
+.nasa-date {
+    text-align: center;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+}
+
+/* NASA Video Container (for video APODs) */
+.nasa-video-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 2px solid rgba(86, 129, 255, 0.2);
+    background: rgba(13, 17, 38, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nasa-video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Custom Scrollbar for Description */
+.nasa-description::-webkit-scrollbar {
+    width: 6px;
+}
+
+.nasa-description::-webkit-scrollbar-track {
+    background: rgba(13, 17, 38, 0.3);
+    border-radius: 3px;
+}
+
+.nasa-description::-webkit-scrollbar-thumb {
+    background: rgba(86, 129, 255, 0.3);
+    border-radius: 3px;
+}
+
+.nasa-description::-webkit-scrollbar-thumb:hover {
+    background: rgba(86, 129, 255, 0.5);
+}
+
+/* Loading State */
+.nasa-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #5681ff;
+    font-size: 1.1em;
+    background: rgba(86, 128, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(86, 129, 255, 0.2);
+}
+
+/* Entertainment Box - Bottom spanning under ISS and APOD */
+.entertainment {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(13, 17, 38, 0.8), rgba(20, 24, 60, 0.8));
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(86, 129, 255, 0.2);
+    border: 1px solid rgba(86, 129, 255, 0.2);
+}
+
+.content-item {
+    background: rgba(86, 128, 255, 0.1);
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.content-item:hover {
+    transform: translateX(5px);
+    background: rgba(86, 128, 255, 0.15);
+    border-color: rgba(86, 128, 255, 0.3);
+}
+
+/* Animations */
+@keyframes starsMove {
+    from { background-position: 0 0, 40px 60px, 130px 270px; }
+    to { background-position: 550px 550px, 590px 610px, 680px 920px; }
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(13, 17, 38, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(86, 129, 255, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(86, 129, 255, 0.5);
+}
+
+/* Next Visual Pass Section */
+.next-pass {
+    margin-top: 20px;
+    background: rgba(86, 128, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+    text-align: center;
+}
+
+.next-pass h3 {
+    color: #5681ff;
+    font-size: 1.3em;
+    text-shadow: 0 0 10px rgba(86, 129, 255, 0.5);
+    margin-bottom: 12px;
+}
+
+.next-pass p {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    padding: 10px;
+    background: rgba(86, 128, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(86, 128, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.next-pass p:hover {
+    background: rgba(86, 128, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(86, 129, 255, 0.2);
+}
+
+.next-pass .telescope-icon {
+    font-size: 1.2em;
+    color: #5681ff;
+    text-shadow: 0 0 8px rgba(86, 129, 255, 0.6);
+}
+
+.next-pass .time-highlight {
+    color: #5681ff;
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(86, 129, 255, 0.4);
+}
+
+.next-pass .date-highlight {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+   

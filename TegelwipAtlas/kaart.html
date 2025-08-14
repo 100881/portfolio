@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/map.css">
+  <title>Nederland Provinciekaart - Groene Statistieken</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  
+</style>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">🌿</div>
+        <span>Nederland Vergroent</span>
+      </div>
+      <div class="nav-buttons">
+        <a href="index.html" class="btn-secondary">Home</a>
+        <a href="index.html#features" class="btn-secondary">Functies</a>
+        <a href="index.html#about" class="btn-secondary">Over</a>
+        <a href="kaart.html" class="btn-primary">Atlas Bekijken</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+
+    <div class="map-container">
+      <div class="map-header">
+        <div class="map-title">
+          <span class="map-title-icon">🗺️</span>
+          <h2>Interactieve Provinciekaart</h2>
+        </div>
+        <div class="map-status">
+          <div class="status-dot"></div>
+          <span>Live Data</span>
+        </div>
+      </div>
+
+      <div id="search-panel">
+        <div class="search-container">
+          <div class="search-title">
+            <div class="search-title-icon">🔍</div>
+            <span>Zoek Locatie</span>
+          </div>
+          
+          <div class="search-input-container">
+            <input type="text" id="search-input" placeholder="Zoek straat, stad of postcode..." />
+            <div class="search-input-icon">📍</div>
+          </div>
+          
+          <div class="search-actions">
+            <button id="search-button">
+              <span>🔍</span>
+              <span>Zoeken</span>
+            </button>
+            <button class="clear-button" id="clear-button">
+              <span>✕</span>
+            </button>
+          </div>
+          
+          <div class="search-shortcuts">
+            <div class="shortcuts-title">Snel zoeken</div>
+            <div class="shortcut-tags">
+              <span class="shortcut-tag" data-search="Amsterdam">Amsterdam</span>
+              <span class="shortcut-tag" data-search="Rotterdam">Rotterdam</span>
+              <span class="shortcut-tag" data-search="Utrecht">Utrecht</span>
+              <span class="shortcut-tag" data-search="Den Haag">Den Haag</span>
+              <span class="shortcut-tag" data-search="Eindhoven">Eindhoven</span>
+            </div>
+          </div>
+          
+          <div id="search-results"></div>
+        </div>
+      </div>
+
+      <div id="map"></div>
+    </div>
+
+
+    <div class="info-container">
+      <div id="info-panel">
+        <div class="panel-header">
+          🌱 Vergroening stastieken
+        </div>
+        <div class="panel-content">
+          <div class="welcome-message">
+            🗺️ Klik op een provincie om de vergroeningsstatistieken te ontdekken en te zien hoe Nederland steeds groener wordt!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+<script src="js/kaart.js"></script>
+  
+</body>
+</html>
