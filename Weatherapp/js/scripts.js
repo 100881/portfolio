@@ -1,23 +1,17 @@
-// OpenWeatherMap API Key (replace with your own API key)
 const weatherApiKey = '043a1061dfaf354493722f0c7a2a1e7c';
 const city = 'Rotterdam';
-
-// Add your NASA API key
 const nasaApiKey = 'O0lD7RVokZYuVkSlTYioqKjeVE32ENMXcmoTrR0K';
 
 async function getWeather() {
     try {
-        // Get current weather
         const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherApiKey}`;
         const currentResponse = await fetch(currentWeatherUrl);
         const currentData = await currentResponse.json();
 
-        // Get 5-day forecast
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${weatherApiKey}`;
         const forecastResponse = await fetch(forecastUrl);
         const forecastData = await forecastResponse.json();
 
-        // Update current weather
         document.getElementById('temperature').textContent = Math.round(currentData.main.temp);
         document.getElementById('weather-description').textContent = currentData.weather[0].description;
         document.getElementById('humidity').textContent = currentData.main.humidity;
@@ -27,10 +21,8 @@ async function getWeather() {
         const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
         document.getElementById('weather-icon').innerHTML = `<img src="${iconUrl}" alt="${currentData.weather[0].description}">`;
 
-        // Process and display forecast
         const forecastContainer = document.getElementById('forecast-container');
         const dailyForecasts = processForecastData(forecastData.list);
-        
         forecastContainer.innerHTML = dailyForecasts.map(day => `
             <div class="forecast-day">
                 <h3>${formatDate(day.date)}</h3>
@@ -45,7 +37,6 @@ async function getWeather() {
                 <p>${day.description}</p>
             </div>
         `).join('');
-
     } catch (error) {
         console.error('Error fetching weather:', error);
         document.getElementById('temperature').textContent = '--';
@@ -58,10 +49,8 @@ async function getWeather() {
 
 function processForecastData(forecastList) {
     const dailyData = {};
-    
     forecastList.forEach(forecast => {
         const date = new Date(forecast.dt * 1000).toLocaleDateString();
-        
         if (!dailyData[date]) {
             dailyData[date] = {
                 date: new Date(forecast.dt * 1000),
@@ -75,8 +64,7 @@ function processForecastData(forecastList) {
             dailyData[date].maxTemp = Math.max(dailyData[date].maxTemp, forecast.main.temp_max);
         }
     });
-
-    return Object.values(dailyData).slice(1, 6); // Next 5 days
+    return Object.values(dailyData).slice(1, 6);
 }
 
 function formatDate(date) {
@@ -87,107 +75,43 @@ function getTempPercentage(min, max) {
     return ((max - min) / max) * 100;
 }
 
-// ISS Location Function
-// Helper function to calculate sun position (simplified)
-function calculateSunPosition(date, lat, lon) {
-    const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-    const declination = 23.45 * Math.sin((360 * (284 + dayOfYear) / 365) * Math.PI / 180);
-    const hourAngle = 15 * (date.getUTCHours() + date.getUTCMinutes() / 60 - 12);
-    
-    const elevation = Math.asin(
-        Math.sin(declination * Math.PI / 180) * Math.sin(lat * Math.PI / 180) +
-        Math.cos(declination * Math.PI / 180) * Math.cos(lat * Math.PI / 180) * Math.cos(hourAngle * Math.PI / 180)
-    ) * 180 / Math.PI;
-    
-    return elevation;
-}
-
-// Helper function to calculate next visible pass (placeholder)
-function calculateNextVisiblePass() {
-    const now = new Date();
-    const nextPass = new Date(now.getTime() + (2 * 60 * 60 * 1000)); // 2 hours from now
-    return nextPass.toLocaleString();
-}
-
 async function getISSLocation() {
     try {
-        // Using CORS proxy for reliable access
-        const corsProxy = 'https://api.allorigins.win/raw?url=';
-        
-        // Get ISS location
-        const locationResponse = await fetch(corsProxy + encodeURIComponent('http://api.open-notify.org/iss-now.json'));
-        
-        if (!locationResponse.ok) {
-            throw new Error(`Location API error: ${locationResponse.status}`);
-        }
-        
+        // Optie 1: Directe HTTPS API calls (meeste moderne browsers ondersteunen dit)
+        const locationResponse = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
         const locationData = await locationResponse.json();
         
-        // Get people in space
-        const peopleResponse = await fetch(corsProxy + encodeURIComponent('http://api.open-notify.org/astros.json'));
-        
-        if (!peopleResponse.ok) {
-            throw new Error(`People API error: ${peopleResponse.status}`);
-        }
-        
+        const peopleResponse = await fetch('https://api.wheretheiss.at/v1/satellites/25544/crew');
         const peopleData = await peopleResponse.json();
-        
-        // Calculate speed (approximate)
-        const speed = 7.66; // ISS speed in km/s
-        
-        // Get location details
-        const lat = parseFloat(locationData.iss_position.latitude);
-        const lon = parseFloat(locationData.iss_position.longitude);
-        
-        // Calculate visibility (day/night for ISS location)
+
+        const speed = locationData.velocity; // km/s
+        const lat = parseFloat(locationData.latitude);
+        const lon = parseFloat(locationData.longitude);
+
         const now = new Date();
         const sunPosition = calculateSunPosition(now, lat, lon);
         const isDaylight = sunPosition > 0;
-        
-        // Calculate next pass time
+
         const nextPass = calculateNextVisiblePass();
-        
-        // Update the DOM
-        const targetDiv = document.getElementById('iss-data');
-        if (!targetDiv) {
-            console.error('Element with id "iss-data" not found');
-            return;
-        }
-        
-        targetDiv.innerHTML = `
-            <h2>🛰️ ISS Tracker</h2>
-            <div class="iss-location-info">
-                <p><strong>Current Position:</strong></p>
-                <p>📍 Latitude: ${lat.toFixed(4)}°</p>
-                <p>📍 Longitude: ${lon.toFixed(4)}°</p>
-                <p>🕒 Last Updated: ${new Date().toLocaleTimeString()}</p>
-            </div>
-            
+
+        const cryptoDiv = document.getElementById('iss-data');
+        cryptoDiv.innerHTML = `
+            <h2>ISS Tracker</h2>
             <div class="iss-map">
-                <iframe
-                    width="100%"
-                    height="300"
-                    frameborder="0"
-                    scrolling="no"
-                    marginheight="0"
-                    marginwidth="0"
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=${lon-10},${lat-10},${lon+10},${lat+10}&layer=mapnik&marker=${lat},${lon}"
-                    style="filter: invert(90%) hue-rotate(180deg); border-radius: 10px;"
-                ></iframe>
+                <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=${lon-20},${lat-20},${lon+20},${lat+20}&layer=mapnik&marker=${lat},${lon}" style="filter: invert(90%) hue-rotate(180deg);"></iframe>
                 <div class="iss-marker ${isDaylight ? 'daylight' : 'night'}">🛸</div>
             </div>
-            
             <div class="iss-stats">
                 <div class="iss-stat-item">
                     <div class="stat-circle">
-                        <span class="stat-value">${Math.round(speed * 3600)}</span>
+                        <span class="stat-value">${(speed * 3600).toFixed(0)}</span>
                         <span class="stat-label">km/h</span>
                     </div>
                     <p>Current Speed</p>
                 </div>
                 <div class="iss-stat-item">
                     <div class="stat-circle">
-                        <span class="stat-value">${peopleData.number}</span>
+                        <span class="stat-value">${peopleData.length}</span>
                         <span class="stat-label">crew</span>
                     </div>
                     <p>Astronauts</p>
@@ -199,134 +123,113 @@ async function getISSLocation() {
                     <p>${isDaylight ? 'Daylight' : 'Night'}</p>
                 </div>
             </div>
-            
             <div class="iss-crew">
-                <h3>👨‍🚀 Current Crew</h3>
+                <h3>Current Crew</h3>
                 <div class="crew-grid">
-                    ${peopleData.people
-                        .filter(person => person.craft === 'ISS')
-                        .map(person => `
+                    ${peopleData.map(person => `
+                        <div class="crew-member">
+                            <div class="astronaut-icon">👨‍🚀</div>
+                            <p>${person.name}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="next-pass">
+                <h3>Next Visible Pass</h3>
+                <p>🔭 ${nextPass}</p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error fetching ISS data:', error);
+        
+        // Fallback naar originele API met HTTPS CORS proxy
+        try {
+            const corsProxy = 'https://api.allorigins.win/raw?url=';
+            const locationResponse = await fetch(`${corsProxy}http://api.open-notify.org/iss-now.json`);
+            const locationData = await locationResponse.json();
+            const peopleResponse = await fetch(`${corsProxy}http://api.open-notify.org/astros.json`);
+            const peopleData = await peopleResponse.json();
+
+            const speed = 7.66;
+            const lat = parseFloat(locationData.iss_position.latitude);
+            const lon = parseFloat(locationData.iss_position.longitude);
+
+            const now = new Date();
+            const sunPosition = calculateSunPosition(now, lat, lon);
+            const isDaylight = sunPosition > 0;
+
+            const nextPass = calculateNextVisiblePass();
+
+            const cryptoDiv = document.getElementById('iss-data');
+            cryptoDiv.innerHTML = `
+                <h2>ISS Tracker</h2>
+                <div class="iss-map">
+                    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=${lon-20},${lat-20},${lon+20},${lat+20}&layer=mapnik&marker=${lat},${lon}" style="filter: invert(90%) hue-rotate(180deg);"></iframe>
+                    <div class="iss-marker ${isDaylight ? 'daylight' : 'night'}">🛸</div>
+                </div>
+                <div class="iss-stats">
+                    <div class="iss-stat-item">
+                        <div class="stat-circle">
+                            <span class="stat-value">${(speed * 3600).toFixed(0)}</span>
+                            <span class="stat-label">km/h</span>
+                        </div>
+                        <p>Current Speed</p>
+                    </div>
+                    <div class="iss-stat-item">
+                        <div class="stat-circle">
+                            <span class="stat-value">${peopleData.number}</span>
+                            <span class="stat-label">crew</span>
+                        </div>
+                        <p>Astronauts</p>
+                    </div>
+                    <div class="iss-stat-item">
+                        <div class="stat-circle ${isDaylight ? 'sun' : 'moon'}">
+                            <span class="stat-icon">${isDaylight ? '☀️' : '🌙'}</span>
+                        </div>
+                        <p>${isDaylight ? 'Daylight' : 'Night'}</p>
+                    </div>
+                </div>
+                <div class="iss-crew">
+                    <h3>Current Crew</h3>
+                    <div class="crew-grid">
+                        ${peopleData.people.filter(person => person.craft === 'ISS').map(person => `
                             <div class="crew-member">
                                 <div class="astronaut-icon">👨‍🚀</div>
                                 <p>${person.name}</p>
                             </div>
                         `).join('')}
+                    </div>
                 </div>
-            </div>
-            
-            <div class="next-pass">
-                <h3>🔭 Next Visible Pass</h3>
-                <p>${nextPass}</p>
-                <small>*Times are estimates based on your location</small>
-            </div>
-            
-            <div class="iss-altitude">
-                <p><strong>🚀 Altitude:</strong> ~420 km above Earth</p>
-                <p><strong>🌍 Orbit:</strong> Completes one orbit every ~93 minutes</p>
-            </div>
-        `;
-        
-        console.log('ISS data loaded successfully');
-        
-    } catch (error) {
-        console.error('Error fetching ISS data:', error);
-        
-        const targetDiv = document.getElementById('iss-data');
-        if (targetDiv) {
-            targetDiv.innerHTML = `
-                <h2>🛰️ ISS Tracker</h2>
-                <div class="error-container">
-                    <p class="error">❌ Failed to load ISS data</p>
-                    <p class="error-details">Error: ${error.message}</p>
-                    <button onclick="getISSLocation()" class="retry-btn">🔄 Retry</button>
+                <div class="next-pass">
+                    <h3>Next Visible Pass</h3>
+                    <p>🔭 ${nextPass}</p>
                 </div>
-                <div class="fallback-info">
-                    <h3>ℹ️ About the ISS</h3>
-                    <p>The International Space Station orbits Earth at approximately 420 km altitude, traveling at about 27,600 km/h.</p>
-                </div>
+            `;
+        } catch (fallbackError) {
+            console.error('Fallback also failed:', fallbackError);
+            document.getElementById('iss-data').innerHTML = `
+                <h2>ISS Tracker</h2>
+                <p class="error">Failed to load ISS data</p>
             `;
         }
     }
 }
 
-// Auto-refresh function
-function startISSTracking() {
-    // Load immediately
-    getISSLocation();
-    
-    // Refresh every 30 seconds
-    const intervalId = setInterval(getISSLocation, 30000);
-    
-    // Store interval ID so it can be cleared if needed
-    window.issTrackingInterval = intervalId;
-    
-    console.log('ISS tracking started - updating every 30 seconds');
-}
-
-// Stop tracking function
-function stopISSTracking() {
-    if (window.issTrackingInterval) {
-        clearInterval(window.issTrackingInterval);
-        window.issTrackingInterval = null;
-        console.log('ISS tracking stopped');
-    }
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, starting ISS tracking...');
-    startISSTracking();
-});
-
-// Alternative direct API calls (backup method)
-async function getISSLocationDirect() {
-    try {
-        // Try direct HTTPS calls first
-        const locationResponse = await fetch('https://api.open-notify.org/iss-now.json');
-        const peopleResponse = await fetch('https://api.open-notify.org/astros.json');
-        
-        if (!locationResponse.ok || !peopleResponse.ok) {
-            throw new Error('Direct API calls failed, falling back to proxy');
-        }
-        
-        const locationData = await locationResponse.json();
-        const peopleData = await peopleResponse.json();
-        
-        // Process data same as above...
-        console.log('Direct API calls successful');
-        
-    } catch (error) {
-        console.log('Direct API failed, using proxy method');
-        return getISSLocation();
-    }
-}
-
-// Helper function for sun position (simplified)
 function calculateSunPosition(date, lat, lon) {
-    // This is a simplified calculation
     const hour = date.getUTCHours() + (lon / 15);
     return Math.sin((hour - 12) / 12 * Math.PI);
 }
 
-// Helper function for next pass (placeholder)
 function calculateNextVisiblePass() {
-    // This would normally use more complex calculations
     const date = new Date();
     date.setHours(date.getHours() + Math.floor(Math.random() * 24));
-    return date.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit',
-        hour12: true 
-    });
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 }
 
-// Space Information Function
 async function getSpaceInfo() {
     try {
-        // Get astronomy picture and fact
         const factResponse = await fetch('https://api.le-systeme-solaire.net/rest/bodies/earth');
         const planetData = await factResponse.json();
-
         const newsContainer = document.getElementById('news-container');
         newsContainer.innerHTML = `
             <h2>Space Explorer</h2>
@@ -360,25 +263,17 @@ async function getSpaceInfo() {
     }
 }
 
-// Helper function to get next full moon date
 function getNextFullMoon() {
     const today = new Date();
-    const lastFullMoon = new Date('2024-03-25'); // Known full moon date
-    const lunarMonth = 29.53059 * 24 * 60 * 60 * 1000; // Lunar month in milliseconds
-    
+    const lastFullMoon = new Date('2024-03-25');
+    const lunarMonth = 29.53059 * 24 * 60 * 60 * 1000;
     const nextFullMoon = new Date(lastFullMoon.getTime());
     while (nextFullMoon <= today) {
         nextFullMoon.setTime(nextFullMoon.getTime() + lunarMonth);
     }
-    
-    return nextFullMoon.toLocaleDateString('en-US', { 
-        month: 'long', 
-        day: 'numeric', 
-        year: 'numeric' 
-    });
+    return nextFullMoon.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-// Helper function to get next meteor shower
 function getNextMeteorShower() {
     const meteorShowers = [
         { name: 'Lyrids', peak: '2024-04-22' },
@@ -386,21 +281,15 @@ function getNextMeteorShower() {
         { name: 'Perseids', peak: '2024-08-12' },
         { name: 'Geminids', peak: '2024-12-14' }
     ];
-    
     const today = new Date();
     const nextShower = meteorShowers.find(shower => new Date(shower.peak) > today);
-    
     if (nextShower) {
         const date = new Date(nextShower.peak);
-        return `${nextShower.name} (${date.toLocaleDateString('en-US', { 
-            month: 'long', 
-            day: 'numeric' 
-        })})`;
+        return `${nextShower.name} (${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })})`;
     }
     return 'Loading...';
 }
 
-// NASA APOD Function
 async function getNASAImage() {
     try {
         console.log('Fetching NASA APOD...');
@@ -408,14 +297,13 @@ async function getNASAImage() {
         console.log('NASA API Response:', response.status);
         const data = await response.json();
         console.log('NASA Data:', data);
-        
+
         const nasaContent = document.getElementById('nasa-content');
         if (!nasaContent) {
             console.error('NASA content element not found! Make sure you have an element with id="nasa-content"');
             return;
         }
-        
-        // Check if it's a video or an image
+
         if (data.media_type === 'video') {
             nasaContent.innerHTML = `
                 <h3>${data.title}</h3>
@@ -437,20 +325,16 @@ async function getNASAImage() {
         console.error('Detailed error fetching NASA APOD:', error);
         const nasaContent = document.getElementById('nasa-content');
         if (nasaContent) {
-            nasaContent.innerHTML = `
-                <p class="error">Failed to load NASA's Picture of the Day: ${error.message}</p>
-            `;
+            nasaContent.innerHTML = `<p class="error">Failed to load NASA's Picture of the Day: ${error.message}</p>`;
         }
     }
 }
 
-// Initialize all functions
 getWeather();
 getISSLocation();
 getSpaceInfo();
 getNASAImage();
 
-// Refresh data every 2 minutes
 setInterval(() => {
     getWeather();
     getISSLocation();
