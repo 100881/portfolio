@@ -1,0 +1,285 @@
+
+  @media (max-width: 1282px) {
+ body{
+  overflow-x: hidden;
+}
+    #nav .hamburger,
+    .symbol5,
+    .diamant {
+      display: none;
+    }
+  
+    .naam {
+      margin-bottom: 6vh;
+      margin-left: -230px;
+    }
+  
+    .hart {
+      margin-left: -140px;
+    }
+  
+    .achternaam {
+      margin-left: -200px;
+    }
+  
+    .profile-image {
+      width: 40vw;
+      height: auto;
+    }
+  
+        #skills{
+      margin-top: 10%;
+    }
+
+    .timeline-container {
+      margin-left: 50px;
+      padding: 100px 150px;
+    }
+  
+    .timeline-line {
+      height: 90% !important;
+      left: 50px;
+      transform: none;
+    }
+  
+    .year-marker {
+      left: 30px;
+      transform: none;
+    }
+  
+    .year-label {
+      left: 50px !important;
+      right: auto !important;
+      transform: none;
+      text-align: left;
+    }
+  
+    .project-card {
+      width: 60%;
+      
+    }
+  
+    .left-card,
+    .right-card {
+      margin: 40px 0;
+      padding: 0;
+    }
+  
+    .project-content {
+      padding: 20px;
+    }
+
+
+  }
+  
+  @media (max-width: 768px) {  
+    .naam,
+    .achternaam {
+      font-size: 40px;
+    }
+  
+    .naam {
+      margin-left: -120px;
+    }
+  
+    .hart {
+      padding: 2px;
+      margin-left: -120px;
+    }
+  
+    .achternaam {
+      margin-top: -33px;
+      margin-left: -100px;
+    }
+  
+    .comma{
+      font-size: 55px;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 10px;
+    }
+
+   .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .about-text h2 {
+                font-size: 36px;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+    
+
+ .skills-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+  
+}
+ 
+  .project-card{
+    width: 65vw;
+    margin-bottom: 15%;
+  }
+
+  }
+  
+  @media (max-width: 600px) {
+
+    .symbol2,
+    .comma,
+    .chase-attract {
+      display: none;
+      overflow-x: hidden
+    }
+    #nav {
+      max-width: fit-content;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 35px;
+    }
+  
+    #nav .menu {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 20px;
+      margin-left: 0;
+      padding: 0;
+    }
+  
+    #nav .menu li {
+      margin-left: 0;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+  
+    .profile-image {
+      margin-left: 20px;
+      width: 60vw;
+      height: auto;
+    }
+  
+    .text-container {
+      margin-left: -300px;
+    }
+  
+    .naam,
+    .achternaam {
+      font-size: 50px;
+    }
+  
+    .opleiding {
+      margin-top: 50vh;
+    }
+  
+    .contacteer-mij,
+    .contact-container {
+      display: none;
+      
+    }
+    
+   .project-card{
+    width: 55vw;
+    margin-bottom: 10vh;
+  }
+  }
+  
+  @media (max-width: 480px) {
+
+    .skills-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+ .timeline-line,
+ .year-dot,
+ .year-label{
+  margin-left: -60px;
+  margin-top: -2vh;
+ }
+    .project-card{
+      width: 70vw;
+      margin-left: -25vw;
+    }
+  }
+
+  @media (max-width: 375px) {
+
+        .opleiding {
+      margin-top: 60vh;
+    }
+.profile-image{
+  margin-left: 2vw;
+}
+    .naam {
+      margin-left: 0;
+      font-size: 40px;
+    }
+    .hart{
+      margin-left: 5vw;
+    font-size: 23px;
+    }
+
+    .achternaam{
+font-size: 40px;
+margin-left: 5vw;
+}
+
+    .profile-img{
+      margin-top: 10vh;
+    }
+
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 16px;
+        margin-top: 15px;
+    }
+
+    .skill-card {
+        padding: 20px 15px;
+        min-height: 110px;
+        border-radius: 12px;
+    }
+
+    .skill-card::before {
+        border-radius: 16px;
+        filter: blur(3px);
+    }
+
+    .skill-card i {
+        font-size: 2rem; 
+        margin-bottom: 6px;
+    }
+
+    .skill-name {
+        font-size: 1rem; 
+    }
+
+.timeline-line{
+  height: 20px;
+}
+
+.timeline-line,
+ .year-dot,
+ .year-label{
+  margin-left: -60px;
+ }
+    .project-card{
+      margin-top: 85px;
+      width: 70vw;
+      margin-left: -35vw;
+    }
+
+  }
+  
