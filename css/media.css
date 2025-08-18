@@ -212,6 +212,19 @@
       margin-left: -25vw;
     }
   }
+@media (max-width: 425px) {
+  .naam{
+    font-size: 40px;
+    margin-left: -40px;
+  }
+  .hart{
+    margin-left: -15px;
+  }
+  .achternaam{
+    margin-left: 20px;
+    font-size: 40px;
+  }
+}
 
   @media (max-width: 375px) {
 
